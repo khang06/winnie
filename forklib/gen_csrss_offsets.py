@@ -164,63 +164,46 @@ def get_pe_from_pe(filename, symname = None):
 """
 These fields need to be zeroed:
 System32/ntdll.dll
-.data:0000000180165AE8                       ; __int64 (__fastcall *CsrServerApiRoutine)(_QWORD, _QWORD)
-.data:0000000180165AE8 ?? ?? ?? ?? ?? ??+    CsrServerApiRoutine dq ?                ; DATA XREF: CsrClientConnectToServer:loc_18001DD0Dr
-.data:0000000180165AE8 ?? ??                                                         ; CsrClientConnectToServer+158o ...
-.data:0000000180165AF0 ??                    CsrClientProcess db ?                   ; DATA XREF: CsrClientConnectToServer+89r
-.data:0000000180165AF0                                                               ; CsrClientConnectToServer+9Ew ...
-.data:0000000180165AF1 ??                    CsrInitOnceDone db ?                    ; DATA XREF: CsrClientConnectToServer:loc_18001DCE3r
-.data:0000000180165AF1                                                               ; CsrClientConnectToServer+4Bw ...
-.data:0000000180165AF2 ?? ?? ?? ?? ?? ??+                    align 10h
-.data:0000000180165B00 ?? ??                 CsrPortName     dw ?                    ; DATA XREF: CsrpConnectToServer+103w
-.data:0000000180165B00                                                               ; CsrpConnectToServer+10Ao ...
-.data:0000000180165B02 ?? ??                 word_180165B02  dw ?                    ; DATA XREF: CsrpConnectToServer+7Dw
-.data:0000000180165B04 ?? ?? ?? ??                           align 8
-.data:0000000180165B08 ?? ?? ?? ?? ?? ??+    qword_180165B08 dq ?                    ; DATA XREF: CsrpConnectToServer+8Aw
-.data:0000000180165B08 ?? ??                                                         ; CsrpConnectToServer+F1r ...
-.data:0000000180165B10 ?? ?? ?? ?? ?? ??+    CsrProcessId    dq ?                    ; DATA XREF: CsrpConnectToServer+320w
-.data:0000000180165B10 ?? ??                                                         ; CsrGetProcessIdr
-.data:0000000180165B18 ?? ?? ?? ?? ?? ??+    CsrReadOnlySharedMemorySize dq ?        ; DATA XREF: CsrpConnectToServer+315w
-.data:0000000180165B18 ?? ??                                                         ; CsrVerifyRegion+27r
-.data:0000000180165B20 ?? ?? ?? ?? ?? ??+    CsrPortMemoryRemoteDelta dq ?           ; DATA XREF: CsrpConnectToServer+32Fw
-.data:0000000180165B20 ?? ??                                                         ; CsrClientCallServer+7Br ...
-.data:0000000180165B28 ?? ?? ?? ?? ?? ??+    CsrPortHandle   dq ?                    ; DATA XREF: CsrpConnectToServer+240o
-.data:0000000180165B28 ?? ??                                                         ; CsrClientConnectToServer+BFr ...
-.data:0000000180165B30 ?? ?? ?? ?? ?? ??+    CsrPortHeap     dq ?                    ; DATA XREF: CsrpConnectToServer+378w
-.data:0000000180165B30 ?? ??                                                         ; CsrClientConnectToServer+1A2w ...
-.data:0000000180165B38 ?? ?? ?? ??           CsrPortBaseTag  dd ?                    ; DATA XREF: CsrpConnectToServer+388w
-.data:0000000180165B38                                                               ; CsrClientConnectToServer+1AEw ...
-.data:0000000180165B3C ?? ?? ?? ??                           align 8
-.data:0000000180165B40 ?? ?? ?? ?? ?? ??+    CsrHeap         dq ?                    ; DATA XREF: CsrpConnectToServer+76r
-.data:0000000180165B40 ?? ??                                                         ; CsrClientConnectToServer+56w ...
-.data:0000000180165B48 ?? ?? ?? ?? ?? ??+                    align 10h
-.data:0000000180165B50 ?? ?? ?? ?? ?? ??+    RtlpCurDirRef   dq ?                    ; DATA XREF: RtlSetCurrentDirectory_U+132r
-.data:0000000180165B50 ?? ??                                                         ; RtlSetCurrentDirectory_U+152w ...
-.data:0000000180165B58 ?? ?? ?? ?? ?? ??+                    align 10h
-.data:0000000180165B60 ??                    RtlpEnvironLookupTable db    ? ;        ; DATA XREF: RtlpInitEnvironmentBlock+66o
-.data:0000000180165B60     
+.data:00000001801798A8 CsrServerApiRoutine dq ?                ; DATA XREF: RtlRegisterThreadWithCsrss+46
+.data:00000001801798A8                                         ; RtlRegisterThreadWithCsrss+93 ...
+.data:00000001801798B0 CsrClientProcess db ?                   ; DATA XREF: RtlRegisterThreadWithCsrss+1B
+.data:00000001801798B0                                         ; CsrClientConnectToServer+89 ...
+.data:00000001801798B1 CsrInitOnceDone db ?                    ; DATA XREF: RtlRegisterThreadWithCsrss:loc_180014D6E
+.data:00000001801798B1                                         ; CsrClientConnectToServer:loc_180078AF3 ...
+.data:00000001801798B2                 align 20h
+.data:00000001801798C0 CsrPortName     dw ?                    ; DATA XREF: CsrpConnectToServer+103
+.data:00000001801798C0                                         ; CsrpConnectToServer+10A ...
+.data:00000001801798C2 word_1801798C2  dw ?                    ; DATA XREF: CsrpConnectToServer+7D
+.data:00000001801798C4                 align 8
+.data:00000001801798C8 qword_1801798C8 dq ?                    ; DATA XREF: CsrpConnectToServer+8A
+.data:00000001801798C8                                         ; CsrpConnectToServer+F1 ...
+.data:00000001801798D0 CsrProcessId    dq ?                    ; DATA XREF: CsrpConnectToServer+320
+.data:00000001801798D0                                         ; CsrGetProcessId
+.data:00000001801798D8 CsrReadOnlySharedMemorySize dq ?        ; DATA XREF: CsrpConnectToServer+315
+.data:00000001801798D8                                         ; CsrVerifyRegion+20
+.data:00000001801798E0 CsrPortMemoryRemoteDelta dq ?           ; DATA XREF: CsrpConnectToServer+32F
+.data:00000001801798E0                                         ; CsrClientCallServer+80 ...
+.data:00000001801798E8 ; HANDLE CsrPortHandle
+.data:00000001801798E8 CsrPortHandle   dq ?                    ; DATA XREF: CsrClientConnectToServer+AF
+.data:00000001801798E8                                         ; CsrpConnectToServer+240 ...
+.data:00000001801798F0 CsrPortHeap     dq ?                    ; DATA XREF: CsrClientConnectToServer+193
+.data:00000001801798F0                                         ; CsrpConnectToServer+378 ...
+.data:00000001801798F8 CsrPortBaseTag  dd ?                    ; DATA XREF: CsrClientConnectToServer+19F
+.data:00000001801798F8                                         ; CsrpConnectToServer+388 ...
+.data:00000001801798FC                 align 20h
+.data:0000000180179900 CsrHeap         dq ?                    ; DATA XREF: CsrClientConnectToServer+56
+.data:0000000180179900                                         ; CsrpConnectToServer+76 ...
+.data:0000000180179908                 align 20h
+.data:0000000180179920 HotPatchSpareGlobals db    ? ;
 
 SysWOW64/ntdll.dll
-.data:4B3A1248 ?? ?? ?? ??           _CsrServerApiRoutine dd ?               ; DATA XREF: RtlQueryEnvironmentVariable(x,x,x,x,x,x)+E8o
-.data:4B3A1248                                                               ; RtlRegisterThreadWithCsrss()+3B935r ...
-.data:4B3A124C ??                    _CsrClientProcess db ?                  ; DATA XREF: CsrClientConnectToServer(x,x,x,x,x)+28w
-.data:4B3A124C                                                               ; RtlRegisterThreadWithCsrss():loc_4B325849r
-.data:4B3A124D ??                    _CsrInitOnceDone db ?                   ; DATA XREF: RtlRegisterThreadWithCsrss()+1Fr
-.data:4B3A124E ?? ??                                 align 10h
-.data:4B3A1250 ?? ?? ?? ??           _RtlpCurDirRef  dd ?                    ; DATA XREF: RtlSetCurrentDirectory_U(x)+EEr
-.data:4B3A1250                                                               ; RtlSetCurrentDirectory_U(x)+10Dw ...
-.data:4B3A1254 ??                                    db    ? ;
-.data:4B3A1255 ??                                    db    ? ;
-.data:4B3A1256 ??                                    db    ? ;
-.data:4B3A1257 ??                                    db    ? ;
-.data:4B3A1258 ??                                    db    ? ;
-.data:4B3A1259 ??                                    db    ? ;
-.data:4B3A125A ??                                    db    ? ;
-.data:4B3A125B ??                                    db    ? ;
-.data:4B3A125C ?? ?? ?? ??           dword_4B3A125C  dd ?                    ; DATA XREF: RtlQueryEnvironmentVariable(x,x,x,x,x,x)+188r
-.data:4B3A125C                                                               ; RtlpQueryEnvironmentCache(x,x,x,x,x,x)+6Fr
-.data:4B3A1260 ??                    _RtlpEnvironLookupTable db    ? ;       ; DATA XREF: RtlSetEnvironmentVar(x,x,x,x,x)+318o
-.data:4B3A1260                                                     
+.data:4B3A7FF4 _CsrServerApiRoutine dd ?               ; DATA XREF: RtlRegisterThreadWithCsrss()+6EC60
+.data:4B3A7FF4                                         ; RtlRegisterThreadWithCsrss()+6EC85
+.data:4B3A7FF8 _CsrClientProcess db ?                  ; DATA XREF: CsrClientConnectToServer(x,x,x,x,x)+28
+.data:4B3A7FF8                                         ; RtlRegisterThreadWithCsrss():loc_4B31D554
+.data:4B3A7FF9 _CsrInitOnceDone db ?                   ; DATA XREF: RtlRegisterThreadWithCsrss()+1F
+.data:4B3A7FFA                 align 10h
+.data:4B3A8000 _HotPatchSpareGlobals db    ? ;                               
 """
 
 import pdbparse
@@ -306,11 +289,11 @@ def main():
         pdb = pdbparse.parse(ntdll_pdb, fast_load = True)
         addrs = symbol_addresses(pdb)
         rva_CsrServerApiRoutine_x64 = addrs['CsrServerApiRoutine']
-        rva_RtlpEnvironLookupTable_x64 = addrs['RtlpEnvironLookupTable']
-        f.write('// RVA of CsrServerApiRoutine up to RtlpEnvironLookupTable in System32\\ntdll.exe\n')
+        rva_HotPatchSpareGlobals_x64 = addrs['HotPatchSpareGlobals']
+        f.write('// RVA of CsrServerApiRoutine up to HotPatchSpareGlobals in System32\\ntdll.exe\n')
         f.write('#define csrDataRva_x64 ' + hex(rva_CsrServerApiRoutine_x64) + '\n')
-        f.write('// RtlpEnvironLookupTable = ' + hex(rva_RtlpEnvironLookupTable_x64) + '\n')
-        f.write('#define csrDataSize_x64 ' + hex(rva_RtlpEnvironLookupTable_x64 - rva_CsrServerApiRoutine_x64) + '\n')
+        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals_x64) + '\n')
+        f.write('#define csrDataSize_x64 ' + hex(rva_HotPatchSpareGlobals_x64 - rva_CsrServerApiRoutine_x64) + '\n')
         f.write('\n')
         
         f.write('#else\n\n')
@@ -319,17 +302,17 @@ def main():
         pdb = pdbparse.parse(ntdll_pdb, fast_load = True)
         addrs = symbol_addresses(pdb)
         rva_CsrServerApiRoutine = addrs['_CsrServerApiRoutine']
-        rva_RtlpEnvironLookupTable = addrs['_RtlpEnvironLookupTable']
+        rva_HotPatchSpareGlobals = addrs['_HotPatchSpareGlobals']
         f.write('// WoW64 ntdll.dll\n')
-        f.write('// RVA of _CsrServerApiRoutine up to _RtlpEnvironLookupTable in SysWOW64\\ntdll.dll\n')
+        f.write('// RVA of _CsrServerApiRoutine up to _HotPatchSpareGlobals in SysWOW64\\ntdll.dll\n')
         f.write('#define csrDataRva_x86 ' + hex(rva_CsrServerApiRoutine) + '\n')
-        f.write('// RtlpEnvironLookupTable = ' + hex(rva_RtlpEnvironLookupTable) + '\n')
-        f.write('#define csrDataSize_x86 ' + hex(rva_RtlpEnvironLookupTable - rva_CsrServerApiRoutine) + '\n')
+        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals) + '\n')
+        f.write('#define csrDataSize_x86 ' + hex(rva_HotPatchSpareGlobals - rva_CsrServerApiRoutine) + '\n')
         f.write('\n')
-        f.write('// RVA of CsrServerApiRoutine up to RtlpEnvironLookupTable in System32\\ntdll.exe\n')
+        f.write('// RVA of CsrServerApiRoutine up to HotPatchSpareGlobals in System32\\ntdll.exe\n')
         f.write('#define csrDataRva_wow64 ' + hex(rva_CsrServerApiRoutine_x64) + '\n')
-        f.write('// RtlpEnvironLookupTable = ' + hex(rva_RtlpEnvironLookupTable_x64) + '\n')
-        f.write('#define csrDataSize_wow64 ' + hex(rva_RtlpEnvironLookupTable_x64 - rva_CsrServerApiRoutine_x64) + '\n')
+        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals_x64) + '\n')
+        f.write('#define csrDataSize_wow64 ' + hex(rva_HotPatchSpareGlobals_x64 - rva_CsrServerApiRoutine_x64) + '\n')
         f.write('\n')
 
         f.write('#endif\n')
@@ -348,11 +331,11 @@ def main():
         pdb = pdbparse.parse(ntdll_pdb, fast_load = True)
         addrs = symbol_addresses(pdb)
         rva_CsrServerApiRoutine = addrs['CsrServerApiRoutine']
-        rva_RtlpEnvironLookupTable = addrs['RtlpEnvironLookupTable']
-        f.write('// RVA of CsrServerApiRoutine up to RtlpEnvironLookupTable in System32\\ntdll.exe\n')
+        rva_HotPatchSpareGlobals = addrs['HotPatchSpareGlobals']
+        f.write('// RVA of CsrServerApiRoutine up to HotPatchSpareGlobals in System32\\ntdll.exe\n')
         f.write('#define csrDataRva_x86 ' + hex(rva_CsrServerApiRoutine) + '\n')
-        f.write('// RtlpEnvironLookupTable = ' + hex(rva_RtlpEnvironLookupTable) + '\n')
-        f.write('#define csrDataSize_x86 ' + hex(rva_RtlpEnvironLookupTable - rva_CsrServerApiRoutine) + '\n')
+        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals) + '\n')
+        f.write('#define csrDataSize_x86 ' + hex(rva_HotPatchSpareGlobals - rva_CsrServerApiRoutine) + '\n')
         f.write('\n')
 
         f.write('// WoW64 not supported on native 32-bit platform\n')
