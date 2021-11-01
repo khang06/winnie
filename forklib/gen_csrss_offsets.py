@@ -289,11 +289,11 @@ def main():
         pdb = pdbparse.parse(ntdll_pdb, fast_load = True)
         addrs = symbol_addresses(pdb)
         rva_CsrServerApiRoutine_x64 = addrs['CsrServerApiRoutine']
-        rva_HotPatchSpareGlobals_x64 = addrs['HotPatchSpareGlobals']
-        f.write('// RVA of CsrServerApiRoutine up to HotPatchSpareGlobals in System32\\ntdll.exe\n')
+        rva_RtlpUnloadEventTraceEx_x64 = addrs['RtlpUnloadEventTraceEx']
+        f.write('// RVA of CsrServerApiRoutine up to RtlpUnloadEventTraceEx in System32\\ntdll.exe\n')
         f.write('#define csrDataRva_x64 ' + hex(rva_CsrServerApiRoutine_x64) + '\n')
-        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals_x64) + '\n')
-        f.write('#define csrDataSize_x64 ' + hex(rva_HotPatchSpareGlobals_x64 - rva_CsrServerApiRoutine_x64) + '\n')
+        f.write('// RtlpUnloadEventTraceEx = ' + hex(rva_RtlpUnloadEventTraceEx_x64) + '\n')
+        f.write('#define csrDataSize_x64 ' + hex(rva_RtlpUnloadEventTraceEx_x64 - rva_CsrServerApiRoutine_x64) + '\n')
         f.write('\n')
         
         f.write('#else\n\n')
@@ -302,17 +302,17 @@ def main():
         pdb = pdbparse.parse(ntdll_pdb, fast_load = True)
         addrs = symbol_addresses(pdb)
         rva_CsrServerApiRoutine = addrs['_CsrServerApiRoutine']
-        rva_HotPatchSpareGlobals = addrs['_HotPatchSpareGlobals']
+        rva_RtlpUnloadEventTraceEx = addrs['_RtlpUnloadEventTraceEx']
         f.write('// WoW64 ntdll.dll\n')
-        f.write('// RVA of _CsrServerApiRoutine up to _HotPatchSpareGlobals in SysWOW64\\ntdll.dll\n')
+        f.write('// RVA of _CsrServerApiRoutine up to _RtlpUnloadEventTraceEx in SysWOW64\\ntdll.dll\n')
         f.write('#define csrDataRva_x86 ' + hex(rva_CsrServerApiRoutine) + '\n')
-        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals) + '\n')
-        f.write('#define csrDataSize_x86 ' + hex(rva_HotPatchSpareGlobals - rva_CsrServerApiRoutine) + '\n')
+        f.write('// RtlpUnloadEventTraceEx = ' + hex(rva_RtlpUnloadEventTraceEx) + '\n')
+        f.write('#define csrDataSize_x86 ' + hex(rva_RtlpUnloadEventTraceEx - rva_CsrServerApiRoutine) + '\n')
         f.write('\n')
-        f.write('// RVA of CsrServerApiRoutine up to HotPatchSpareGlobals in System32\\ntdll.exe\n')
+        f.write('// RVA of CsrServerApiRoutine up to RtlpUnloadEventTraceEx in System32\\ntdll.exe\n')
         f.write('#define csrDataRva_wow64 ' + hex(rva_CsrServerApiRoutine_x64) + '\n')
-        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals_x64) + '\n')
-        f.write('#define csrDataSize_wow64 ' + hex(rva_HotPatchSpareGlobals_x64 - rva_CsrServerApiRoutine_x64) + '\n')
+        f.write('// RtlpUnloadEventTraceEx = ' + hex(rva_RtlpUnloadEventTraceEx_x64) + '\n')
+        f.write('#define csrDataSize_wow64 ' + hex(rva_RtlpUnloadEventTraceEx_x64 - rva_CsrServerApiRoutine_x64) + '\n')
         f.write('\n')
 
         f.write('#endif\n')
@@ -331,11 +331,11 @@ def main():
         pdb = pdbparse.parse(ntdll_pdb, fast_load = True)
         addrs = symbol_addresses(pdb)
         rva_CsrServerApiRoutine = addrs['CsrServerApiRoutine']
-        rva_HotPatchSpareGlobals = addrs['HotPatchSpareGlobals']
-        f.write('// RVA of CsrServerApiRoutine up to HotPatchSpareGlobals in System32\\ntdll.exe\n')
+        rva_RtlpUnloadEventTraceEx = addrs['RtlpUnloadEventTraceEx']
+        f.write('// RVA of CsrServerApiRoutine up to RtlpUnloadEventTraceEx in System32\\ntdll.exe\n')
         f.write('#define csrDataRva_x86 ' + hex(rva_CsrServerApiRoutine) + '\n')
-        f.write('// HotPatchSpareGlobals = ' + hex(rva_HotPatchSpareGlobals) + '\n')
-        f.write('#define csrDataSize_x86 ' + hex(rva_HotPatchSpareGlobals - rva_CsrServerApiRoutine) + '\n')
+        f.write('// RtlpUnloadEventTraceEx = ' + hex(rva_RtlpUnloadEventTraceEx) + '\n')
+        f.write('#define csrDataSize_x86 ' + hex(rva_RtlpUnloadEventTraceEx - rva_CsrServerApiRoutine) + '\n')
         f.write('\n')
 
         f.write('// WoW64 not supported on native 32-bit platform\n')

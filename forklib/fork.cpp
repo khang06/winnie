@@ -171,10 +171,10 @@ BOOL ConnectCsrChild()
 
 	printf("FORKLIB: Link Windows subsystem...\n");
 	// passing &gfServerProcess is not necessary, actually? passing &trash is okay?
-	char buf[0x240]; // this seem to just be all zero everytime?
+	char buf[0x248]; // this seem to just be all zero everytime?
 	memset(buf, 0, sizeof(buf));
 	//if (!NT_SUCCESS(CsrClientConnectToServer(L"\\Sessions\\" CSRSS_SESSIONID L"\\Windows", 3, buf, 0x240, &trash)))
-	if (!NT_SUCCESS(CsrClientConnectToServer(ObjectDirectory, 3, buf, 0x240, &trash)))
+	if (!NT_SUCCESS(CsrClientConnectToServer(ObjectDirectory, 3, buf, 0x248, &trash)))
 	{
 		printf("FORKLIB: CsrClientConnectToServer failed!\n");
 		return FALSE;

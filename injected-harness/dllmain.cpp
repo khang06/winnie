@@ -625,6 +625,7 @@ void CreateFile_hook(EXCEPTION_POINTERS *ExceptionInfo)
 
 #ifdef _WIN64
 	DWORD64 r8 = ExceptionInfo->ContextRecord->R8;
+	DWORD64 rsp = ExceptionInfo->ContextRecord->Rsp;
 	// See if the file name contains .cur_input	
 	POBJECT_ATTRIBUTES obj = (POBJECT_ATTRIBUTES)r8;
 	PUNICODE_STRING testStr = (PUNICODE_STRING)obj->ObjectName;	
@@ -636,8 +637,8 @@ void CreateFile_hook(EXCEPTION_POINTERS *ExceptionInfo)
 		// overwrite buffer
 		debug_printf("Intercepted NtCreateFile on input file; overwrite share flag\n");
 		DWORD shared_flag = FILE_SHARE_READ | FILE_SHARE_WRITE;
-		*(DWORD64*)(r8 + (sizeof(DWORD) * 7)) |= shared_flag;
-
+		//*(DWORD64*)(r8 + (sizeof(DWORD) * 7)) |= shared_flag;
+		*(DWORD64*)(rsp + 0x38) |= shared_flag;
 	}
 #else
 	DWORD esp = ExceptionInfo->ContextRecord->Esp;
