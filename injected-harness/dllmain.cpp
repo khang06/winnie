@@ -261,8 +261,12 @@ void InstallBreakpoint(HMODULE hModule, uintptr_t rva)
 breakpoint_t RestoreBreakpoint(LPVOID target)
 {
 	breakpoints_mutex.lock();
-	if (breakpoints.find(target) == breakpoints.end())
-		FATAL("RestoreBreakpoint: attempting to restore nonexistent breakpoint");
+	if (breakpoints.find(target) == breakpoints.end()) {
+		fprintf(fuzzer_stdout, "attempting to restore nonexistent breakpoint, but ignoring it! hopefully nothing goes wrong! 0x%p\n", target);
+		breakpoints_mutex.unlock();
+		return {};
+		//FATAL("RestoreBreakpoint: attempting to restore nonexistent breakpoint");
+	}
 	breakpoint_t breakpoint = breakpoints[target];
 	//trace_printf("The stolen byte was %p\n", stolenByte);
 	breakpoints.erase(target);

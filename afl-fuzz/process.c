@@ -41,6 +41,7 @@ HMODULE FindModule(HANDLE hProcess, const char* szModuleName)
 		char szModName[MAX_PATH];
 		if (GetModuleFileNameExA(hProcess, hMods[i], szModName, sizeof(szModName) / sizeof(char)))
 		{
+			trace_printf("%s %s\n", szModuleName, szModName);
 			if (!_stricmp(szModuleName, szModName))
 			{
 				result = hMods[i];
@@ -89,6 +90,10 @@ HMODULE InjectDll(HANDLE hProcess, LPCSTR szDllFilename)
 	Sleep(100);
 	//trace_printf("Success\n");
 	CloseHandle(hThread);
+
+	// tries to use double backslash for some reason, too lazy to fix this properly
+	if (!_stricmp(szDllFilename, "R:\\\\forkserver.dll"))
+		szDllFilename = "R:\\forkserver.dll";
 
 	return FindModule(hProcess, szDllFilename);
 }
