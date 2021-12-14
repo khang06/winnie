@@ -684,12 +684,15 @@ void TerminateProcess_hook(EXCEPTION_POINTERS* ExceptionInfo)
 	}
 }
 
+std::mutex bp_handler_lock;
 LONG WINAPI BreakpointHandler(EXCEPTION_POINTERS *ExceptionInfo)
 {
+	const std::lock_guard<std::mutex> lock(bp_handler_lock);
+
 	//trace_printf("Enter %d\n", handlerReentrancy);
 	if (InterlockedIncrement(&handlerReentrancy) != 1)
 	{
-		FATAL("The breakpoint handler itself generated an exeption (code=%08x, IP=%p) !!! Likely the breakpoint handler is faulty!!", ExceptionInfo->ExceptionRecord->ExceptionCode, ExceptionInfo->ContextRecord->INSTRUCTION_POINTER);
+		FATAL("The breakpoint handler itself generated an exeption (code=%08x, IP=%p, tid=%d) !!! Likely the breakpoint handler is faulty!!", ExceptionInfo->ExceptionRecord->ExceptionCode, ExceptionInfo->ContextRecord->INSTRUCTION_POINTER, GetCurrentThreadId());
 	}
 	
 	// single step from ntcreatefile hook
@@ -748,7 +751,7 @@ LONG WINAPI BreakpointHandler(EXCEPTION_POINTERS *ExceptionInfo)
 			}
 			else
 			{
-				debug_printf("Covered basicblock %p\n", ip);
+				debug_printf("Covered basicblock %p, tid %d\n", ip, GetCurrentThreadId());
 				breakpoint_t bp = RestoreBreakpoint(ip);
 				report_coverage((uintptr_t) ip, bp);
 				
